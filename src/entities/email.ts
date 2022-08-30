@@ -1,5 +1,6 @@
-import { Either, left, right } from '../shared'
 import { valid } from './email-validator'
+import { InvalidEmailError } from './errors'
+import { Either, left, right } from '../shared'
 
 export class Email {
   public readonly value: string
@@ -9,11 +10,11 @@ export class Email {
     Object.freeze(this) // makes the object immutable
   }
 
-  public static create (email: string): Either<Error, Email> {
+  public static create (email: string): Either<InvalidEmailError, Email> {
     if (valid(email)) {
       return right(new Email(email))
     }
 
-    return left(new Error(email))
+    return left(new InvalidEmailError(email))
   }
 }
