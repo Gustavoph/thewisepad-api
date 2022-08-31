@@ -1,3 +1,3 @@
 Email
  - should not accept null strings ✅
- - should not accept empty strings
+ - should not accept empty strings ✅
