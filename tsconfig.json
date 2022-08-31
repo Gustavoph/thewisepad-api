@@ -5,6 +5,5 @@
     "esModuleInterop": true,
     "allowJs": true,
     "baseUrl": ".",
-    "strict": true,                                     
   }
 }
