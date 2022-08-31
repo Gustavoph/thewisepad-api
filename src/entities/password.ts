@@ -1,5 +1,5 @@
-import { Either, left, right } from '../shared'
-import { InvalidPasswordError } from './errors'
+import { Either, left, right } from '@/shared'
+import { InvalidPasswordError } from '@/entities/errors'
 
 export class Password {
   public readonly value: string

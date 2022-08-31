@@ -1,6 +1,6 @@
 import { valid } from './email-validator'
-import { InvalidEmailError } from './errors'
-import { Either, left, right } from '../shared'
+import { Either, left, right } from '@/shared'
+import { InvalidEmailError } from '@/entities/errors'
 
 export class Email {
   public readonly value: string
