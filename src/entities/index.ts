@@ -1,5 +1,6 @@
 export * from './email'
 export * from './user'
+export * from './note'
 export * from './title'
 export * from './password'
 export * from './email-validator'
