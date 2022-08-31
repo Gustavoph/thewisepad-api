@@ -1,6 +1,6 @@
 export class InvalidTitleError extends Error {
+  public readonly name = 'InvalidTitleError'
   constructor (title: string) {
-    super('Invalid Title')
-    this.name = 'InvalidTitleError'
+    super('Invalid title: ' + title)
   }
 }
