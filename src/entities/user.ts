@@ -6,18 +6,18 @@ export class User {
   private readonly _email: Email
   private readonly _password: Password
 
+  constructor (email: Email, password: Password) {
+    this._email = email
+    this._password = password
+    Object.freeze(this)
+  }
+
   public get email () {
     return this._email
   }
 
   public get password () {
     return this._password
-  }
-
-  constructor (email: Email, password: Password) {
-    this._email = email
-    this._password = password
-    Object.freeze(this)
   }
 
   public static create (email: string, password: string):
