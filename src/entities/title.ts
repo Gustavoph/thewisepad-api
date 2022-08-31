@@ -2,7 +2,7 @@ import { Either, left, right } from '@/shared'
 import { InvalidTitleError } from '@/entities/errors'
 
 export class Title {
-  private readonly value: string
+  public readonly value: string
 
   private constructor (title: string) {
     this.value = title
@@ -14,19 +14,19 @@ export class Title {
       return right(new Title(title))
     }
 
-    return left(new InvalidTitleError('Title is invalid!'))
+    return left(new InvalidTitleError(title))
   }
 }
 
 function valid (title: string): boolean {
-  if (emptyOrTooShort(title) || tooLarge(title)) {
+  if (emptyOrTooLittle(title) || tooLarge(title)) {
     return false
   }
 
   return true
 }
 
-function emptyOrTooShort (title: string): boolean {
+function emptyOrTooLittle (title: string): boolean {
   return !title || title.trim().length < 3
 }
 

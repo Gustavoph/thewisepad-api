@@ -1,4 +1,5 @@
 import { Title, User } from '@/entities'
+import { Either, left, right } from '@/shared'
 import { InvalidTitleError } from './errors'
 
 export class Note {
@@ -18,7 +19,21 @@ export class Note {
     return this._content
   }
 
-  static create (owner: User, title: string, content: string): InvalidTitleError {
-    return new InvalidTitleError(title)
+  private constructor (owner: User, title: Title, content: string) {
+    this._owner = owner
+    this._title = title
+    this._content = content
+    Object.freeze(this)
+  }
+
+  static create (owner: User, title: string, content: string): Either<InvalidTitleError, Note> {
+    const titleOrError = Title.create(title)
+    if (titleOrError.isLeft()) {
+      return left(new InvalidTitleError(title))
+    }
+
+    const titleObject = titleOrError.value
+    const contentObject = content ? '' : content
+    return right(new Note(owner, titleObject, contentObject))
   }
 }
