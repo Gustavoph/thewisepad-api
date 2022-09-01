@@ -20,4 +20,12 @@ describe('Note entity', () => {
     expect(note.owner.email.value).toBe('my@mail.com')
     expect(note.content).toBe(validContent)
   })
+
+  test('should br created with empty content if content is undefined', () => {
+    const undefinedContent = undefined
+    const note: Note = Note.create(validOwner, validTitle, undefinedContent).value as Note
+    expect(note.title.value).toBe('my note')
+    expect(note.owner.email.value).toBe('my@mail.com')
+    expect(note.content).toBe('')
+  })
 })
