@@ -1,6 +1,6 @@
 import { Title, User } from '@/entities'
 import { Either, left, right } from '@/shared'
-import { InvalidTitleError } from './errors'
+import { InvalidTitleError } from '@/entities/errors'
 
 export class Note {
   private readonly _title: Title
@@ -33,7 +33,7 @@ export class Note {
     }
 
     const titleObject = titleOrError.value
-    const contentObject = content ? '' : content
+    const contentObject = !content ? '' : content
     return right(new Note(owner, titleObject, contentObject))
   }
 }
