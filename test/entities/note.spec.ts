@@ -28,4 +28,12 @@ describe('Note entity', () => {
     expect(note.owner.email.value).toBe('my@mail.com')
     expect(note.content).toBe('')
   })
+
+  test('should br created with empty content if content is null', () => {
+    const nullContent = null
+    const note: Note = Note.create(validOwner, validTitle, nullContent).value as Note
+    expect(note.title.value).toBe('my note')
+    expect(note.owner.email.value).toBe('my@mail.com')
+    expect(note.content).toBe('')
+  })
 })
