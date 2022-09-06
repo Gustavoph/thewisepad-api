@@ -1,5 +1,5 @@
 import { InvalidEmailError } from '@/entities/errors'
-import { SignUp } from './sign-up'
+import { SignUp } from '@/use-cases/sign-up/sign-up'
 
 describe('SignUp use case', () => {
   test('should sign up user with valid data', async () => {
