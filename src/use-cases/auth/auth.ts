@@ -19,14 +19,10 @@ export class Authentication implements AuthenticationService {
     const { email, password } = authenticationParams
 
     const user = await this.userRepository.findByEmail(email)
-    if (!user) {
-      return left(new UserNotFoundError())
-    }
+    if (!user) return left(new UserNotFoundError())
 
     const matches = await this.encoder.compare(password, user.password)
-    if (!matches) {
-      return left(new WrongPasswordError())
-    }
+    if (!matches) return left(new WrongPasswordError())
 
     const accessToken = await this.tokenManager.sign({ id: user.id })
 
