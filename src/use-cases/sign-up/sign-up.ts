@@ -3,10 +3,7 @@ import { Either, left, right } from '@/shared'
 import { ExistingUserError } from '@/use-cases/sign-up/errors'
 import { InvalidEmailError, InvalidPasswordError } from '@/entities/errors'
 import { UseCase, UserData, Encoder, UserRepository } from '@/use-cases/ports'
-
-interface AuthenticationService {
-  auth: string
-}
+import { AuthenticationResult, AuthenticationService } from '@/use-cases/auth/ports'
 
 export class SignUp implements UseCase {
   constructor (
@@ -20,7 +17,7 @@ export class SignUp implements UseCase {
   }
 
   async perform (userSignupRequest: UserData):
-  Promise<Either<ExistingUserError | InvalidEmailError | InvalidPasswordError, User>> {
+  Promise<Either<ExistingUserError | InvalidEmailError | InvalidPasswordError, AuthenticationResult>> {
     const { email, password } = userSignupRequest
 
     const userOrError = User.create(email, password)
@@ -35,8 +32,8 @@ export class SignUp implements UseCase {
 
     const encodedPassword = await this.encoder.encode(password)
     await this.userRepository.add({ email, password: encodedPassword })
-
     const response = await this.authentication.auth({ email, password })
-    return right(response)
+
+    return right(response.value as AuthenticationResult)
   }
 }
